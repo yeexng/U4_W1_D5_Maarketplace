@@ -152,4 +152,15 @@ productsRouter.post(
     }
   }
 );
+
+productsRouter.get("/:productId/reviews", async (req, res, next) => {
+  try {
+    const productsArray = await getProductsReview();
+    const index = productsArray.findIndex((p) => p.id === req.params.productId);
+    res.send(productsArray[index].reviews);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 export default productsRouter;

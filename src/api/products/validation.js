@@ -20,13 +20,13 @@ const productSchema = {
       errorMessage: "Please fill in a brand",
     },
   },
-  // price: {
-  //   in: ["body"],
-  //   //changes needed to check if it is checking number
-  //   isString: {
-  //     errorMessage: "Please fill in a price",
-  //   },
-  // },
+  price: {
+    in: ["body"],
+    //   //changes needed to check if it is checking number
+    isInt: {
+      errorMessage: "Please fill in a price",
+    },
+  },
   category: {
     in: ["body"],
     isString: {
@@ -42,12 +42,12 @@ const reviewSchema = {
       errorMessage: "Please do not leave the comment blank",
     },
   },
-  // rate: {
-  //   in: ["body"],
-  //   isString: {
-  //     errorMessage: "Please rate 1 - 5",
-  //   },
-  // },
+  rate: {
+    in: ["body"],
+    isInt: {
+      errorMessage: "Please rate 1 - 5",
+    },
+  },
   productId: {
     in: ["body"],
     isString: {
