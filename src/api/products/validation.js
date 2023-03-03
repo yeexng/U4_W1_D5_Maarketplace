@@ -22,6 +22,7 @@ const productSchema = {
   },
   price: {
     in: ["body"],
+    //changes needed to check if it is checking number
     isString: {
       errorMessage: "Please fill in a price",
     },

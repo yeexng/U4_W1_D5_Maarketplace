@@ -12,6 +12,12 @@ export const getProducts = () => readJSON(productsJSONPath);
 export const writeProducts = (productsArray) =>
   writeJSON(productsJSONPath, productsArray);
 
+//Products Review
+const productsReviewJSONPath = join(dataFolderPath, "review.json");
+export const getProductsReview = () => readJSON(productsReviewJSONPath);
+export const writeProductsReview = (productsReviewArray) =>
+  writeJSON(productsReviewJSONPath, productsReviewArray);
+
 //Image Folder
 //C:\Users\xuan\Desktop\FS 05-22\Unit 3\Build_Week_3_LinkedIn_Build_\U4_W1_D5_Maarketplace\public\img\products
 const productPublicFolderPath = join(process.cwd(), "./public/img/products");
