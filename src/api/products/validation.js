@@ -20,13 +20,13 @@ const productSchema = {
       errorMessage: "Please fill in a brand",
     },
   },
-  price: {
-    in: ["body"],
-    //changes needed to check if it is checking number
-    isString: {
-      errorMessage: "Please fill in a price",
-    },
-  },
+  // price: {
+  //   in: ["body"],
+  //   //changes needed to check if it is checking number
+  //   isString: {
+  //     errorMessage: "Please fill in a price",
+  //   },
+  // },
   category: {
     in: ["body"],
     isString: {
@@ -35,7 +35,29 @@ const productSchema = {
   },
 };
 
+const reviewSchema = {
+  comment: {
+    in: ["body"],
+    isString: {
+      errorMessage: "Please do not leave the comment blank",
+    },
+  },
+  // rate: {
+  //   in: ["body"],
+  //   isString: {
+  //     errorMessage: "Please rate 1 - 5",
+  //   },
+  // },
+  productId: {
+    in: ["body"],
+    isString: {
+      errorMessage: "Product's Id must be provided",
+    },
+  },
+};
+
 export const checkProductSchema = checkSchema(productSchema);
+export const checkProductReviewSchema = checkSchema(reviewSchema);
 
 export const triggerBadRequest = (req, res, next) => {
   const errors = validationResult(req);

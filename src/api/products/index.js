@@ -6,7 +6,11 @@ import {
   writeProducts,
   writeProductsReview,
 } from "../../lib/fs-tools.js";
-import { checkProductSchema, triggerBadRequest } from "./validation.js";
+import {
+  checkProductReviewSchema,
+  checkProductSchema,
+  triggerBadRequest,
+} from "./validation.js";
 
 const productsRouter = Express.Router();
 
@@ -124,23 +128,28 @@ productsRouter.delete("/:productId", async (req, res, next) => {
 });
 
 //review
-productsRouter.post("/:productId/reviews", async (req, res, next) => {
-  try {
-    const newReview = {
-      ...req.body,
-      review_id: uniqid(),
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    };
-    const productsReviewsArray = await getProductsReview();
-    // const index = productsArray.findIndex((p) => p.id === req.params.productId);
-    // productsArray[index].reviews.push(newReview);
-    productsReviewsArray.push(newReview);
-    await writeProductsReview(productsReviewsArray);
-    res.status(201).send("Reviews Updated");
-  } catch (error) {
-    console.log(error);
-    next(error);
+productsRouter.post(
+  "/:productId/reviews",
+  checkProductReviewSchema,
+  triggerBadRequest,
+  async (req, res, next) => {
+    try {
+      const newReview = {
+        ...req.body,
+        review_id: uniqid(),
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      };
+      const productsReviewsArray = await getProductsReview();
+      // const index = productsArray.findIndex((p) => p.id === req.params.productId);
+      // productsArray[index].reviews.push(newReview);
+      productsReviewsArray.push(newReview);
+      await writeProductsReview(productsReviewsArray);
+      res.status(201).send("Reviews Updated");
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
   }
-});
+);
 export default productsRouter;
