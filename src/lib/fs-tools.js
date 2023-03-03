@@ -15,7 +15,7 @@ export const writeProducts = (productsArray) =>
 //Image Folder
 //C:\Users\xuan\Desktop\FS 05-22\Unit 3\Build_Week_3_LinkedIn_Build_\U4_W1_D5_Maarketplace\public\img\products
 const productPublicFolderPath = join(process.cwd(), "./public/img/products");
-console.log(productPublicFolderPath);
+// console.log(productPublicFolderPath);
 
 //Image Upload
 export const saveProductImage = (fileName, fileContentAsBuffer) =>

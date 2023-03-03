@@ -1,26 +1,32 @@
 import Express from "express";
 import uniqid from "uniqid";
 import { getProducts, writeProducts } from "../../lib/fs-tools.js";
+import { checkProductSchema, triggerBadRequest } from "./validation.js";
 
 const productsRouter = Express.Router();
 
-productsRouter.post("/", async (req, res, next) => {
-  try {
-    const newProducts = {
-      ...req.body,
-      id: uniqid(),
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    };
-    const productsArray = await getProducts();
-    productsArray.push(newProducts);
-    await writeProducts(productsArray);
-    res.status(201).send({ id: newProducts.id });
-  } catch (error) {
-    console.log(error);
-    next(error);
+productsRouter.post(
+  "/",
+  checkProductSchema,
+  triggerBadRequest,
+  async (req, res, next) => {
+    try {
+      const newProducts = {
+        ...req.body,
+        id: uniqid(),
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      };
+      const productsArray = await getProducts();
+      productsArray.push(newProducts);
+      await writeProducts(productsArray);
+      res.status(201).send({ id: newProducts.id });
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
   }
-});
+);
 
 productsRouter.get("/", async (req, res, next) => {
   try {
