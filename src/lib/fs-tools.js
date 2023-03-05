@@ -7,10 +7,12 @@ const { readJSON, writeJSON, writeFile } = fs;
 const dataFolderPath = join(dirname(fileURLToPath(import.meta.url)), "../data");
 
 //productsJSONPath & Functions
+///Users/xuanng/Desktop/Epicode/U4_W1_D5_Maarketplace/src/data/products.json
 const productsJSONPath = join(dataFolderPath, "products.json");
 export const getProducts = () => readJSON(productsJSONPath);
 export const writeProducts = (productsArray) =>
   writeJSON(productsJSONPath, productsArray);
+console.log(productsJSONPath);
 
 //Products Review
 const productsReviewJSONPath = join(dataFolderPath, "review.json");
